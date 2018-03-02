@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[A_CommunicationMessagesReceptionSent] (
+    [A_ID]                    INT            IDENTITY (1, 1) NOT NULL,
+    [ID]                      INT            NOT NULL,
+    [MessageId]               INT            NOT NULL,
+    [MessageType]             INT            NOT NULL,
+    [MessageDescription]      NVARCHAR (200) NOT NULL,
+    [MessageDateOfShipment]   DATETIME       NULL,
+    [MessageStatusId]         INT            NOT NULL,
+    [HeliosOrderId]           INT            NOT NULL,
+    [ItemSupplierId]          INT            NOT NULL,
+    [ItemSupplierDescription] NVARCHAR (500) NOT NULL,
+    [ItemDateOfDelivery]      DATETIME       NOT NULL,
+    [IsManually]              BIT            NOT NULL,
+    [StockId]                 INT            NULL,
+    [Notice]                  NVARCHAR (MAX) NULL,
+    [RadaDokladu]             CHAR (3)       NULL,
+    [PoradoveCislo]           INT            NULL,
+    [RadaPlusPorCislo]        NVARCHAR (50)  NULL,
+    [IsActive]                BIT            NOT NULL,
+    [ModifyDate]              DATETIME       NOT NULL,
+    [ModifyUserId]            INT            NOT NULL,
+    [A_ModifyDate]            DATETIME       CONSTRAINT [DF_A_CommunicationMessagesReceptionSent_A_ModifyDate] DEFAULT (getdate()) NOT NULL,
+    CONSTRAINT [PK_A_CommunicationMessagesReceptionSent] PRIMARY KEY CLUSTERED ([A_ID] ASC) WITH (FILLFACTOR = 85)
+);
+
