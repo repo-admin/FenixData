@@ -6,3 +6,35 @@
     PRIMARY KEY CLUSTERED ([Id] ASC) WITH (FILLFACTOR = 85)
 );
 
+
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[B2cKitting] TO [FenixW]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[B2cKitting] TO [FenixW]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[B2cKitting] TO [CrmImport]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[B2cKitting] TO [FenixW]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[B2cKitting] TO [FenixW]
+    AS [dbo];
+

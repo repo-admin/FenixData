@@ -513,8 +513,8 @@ DECLARE @myDatabaseName  nvarchar(100)
 
                  SET @SeznamItems = @seznamItemsOnly +'<br />' + @seznamKitsOnly
                  
-                 SET @myAdresaLogistika = @myAdresaLogistika+';michal.rezler@upc.cz;jaroslav.tajbl@upc.cz'
-                 --SET @myAdresaLogistika = ';michal.rezler@upc.cz;jaroslav.tajbl@upc.cz'
+                 SET @myAdresaLogistika = @myAdresaLogistika+';michal.rezler@upc.cz;max.weczerek@upc.cz'
+                 --SET @myAdresaLogistika = ';michal.rezler@upc.cz;max.weczerek@upc.cz'
                  SET @sub = 'FENIX - RF1 INFO' + ' Databáze: '+ISNULL(@myDatabaseName,'')
                  SET @msg = 'Program [dbo].[prRORF1ins](Refurbished Confirmation)<br /> Nesouhlasí počty SN s reálným množstvím <br />' +@SeznamItems   
                  EXEC @result = msdb.dbo.sp_send_dbmail
@@ -853,7 +853,7 @@ DECLARE @myDatabaseName  nvarchar(100)
        SET @msg = 'Program [dbo].[prRORF1ins]; MessageID  jiz byl zapsan ' + CAST(@myPocet AS VARCHAR(50))
        EXEC @result = msdb.dbo.sp_send_dbmail
       		@profile_name = 'Automat', --@MailProfileName
-      		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+      		@recipients = 'max.weczerek@upc.cz',
       		@subject = @sub,
       		@body = @msg,
       		@body_format = 'HTML'
@@ -868,7 +868,7 @@ BEGIN CATCH
        SET @msg = 'Program [dbo].[prRORF1ins]; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') 
        EXEC @result = msdb.dbo.sp_send_dbmail
       		@profile_name = 'Automat', --@MailProfileName
-      		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+      		@recipients = 'max.weczerek@upc.cz',
       		@subject = @sub,
       		@body = @msg,
       		@body_format = 'HTML'

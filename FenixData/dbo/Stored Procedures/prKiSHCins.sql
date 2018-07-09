@@ -507,8 +507,8 @@ DECLARE @myDatabaseName  nvarchar(100)
 
                  SET @SeznamItems = @seznamItemsOnly +'<br />' + @seznamKitsOnly
 								                  
-                 SET @myAdresaLogistika = @myAdresaLogistika+';michal.rezler@upc.cz;jaroslav.tajbl@upc.cz'
-                 --SET @myAdresaLogistika = ';michal.rezler@upc.cz;jaroslav.tajbl@upc.cz'
+                 SET @myAdresaLogistika = @myAdresaLogistika+';michal.rezler@upc.cz;max.weczerek@upc.cz'
+                 --SET @myAdresaLogistika = ';michal.rezler@upc.cz;max.weczerek@upc.cz'
                  SET @sub = 'FENIX - S1 INFO' + ' Databáze: '+ISNULL(@myDatabaseName,'')+
                             '; MessageId = ' + ISNULL(CAST(@myMessageId AS VARCHAR(50)),'') +  
                             '; (Objednávka = ' + ISNULL(CAST(@myShipmentOrderID AS VARCHAR(50)),'') + ')'  -- 2016-01-13 
@@ -744,7 +744,7 @@ DECLARE @myDatabaseName  nvarchar(100)
                          SET @msg = 'Program [dbo].[prKiSHCins]; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') 
                          EXEC @result = msdb.dbo.sp_send_dbmail
                         		@profile_name = 'Automat', --@MailProfileName
-                        		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+                        		@recipients = 'max.weczerek@upc.cz',
                         		@subject = @sub,
                         		@body = @msg,
                         		@body_format = 'HTML'
@@ -759,7 +759,7 @@ DECLARE @myDatabaseName  nvarchar(100)
                 SET @msg = 'Program [dbo].[prKiSHCins]; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') 
                 EXEC @result = msdb.dbo.sp_send_dbmail
                		@profile_name = 'Automat', --@MailProfileName
-               		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+               		@recipients = 'max.weczerek@upc.cz',
                		@subject = @sub,
                		@body = @msg,
                		@body_format = 'HTML'
@@ -776,7 +776,7 @@ DECLARE @myDatabaseName  nvarchar(100)
                    SET @msg = 'Program [dbo].[prKiSHCins]; Záznam MessageId=' + ISNULL(CAST(@myMessageId AS VARCHAR(50)),'') + ', MessageTypeId = '+ ISNULL(CAST(@myMessageTypeId AS VARCHAR(50)),'') + ' byl již jednou naveden !'
                    EXEC @result = msdb.dbo.sp_send_dbmail
                   		@profile_name = 'Automat', --@MailProfileName
-                  		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+                  		@recipients = 'max.weczerek@upc.cz',
                   		@subject = @sub, 
                   		@body = @msg,
                   		@body_format = 'HTML'
@@ -792,7 +792,7 @@ BEGIN CATCH
        SET @msg = 'Program [dbo].[prKiSHCins]; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') 
        EXEC @result = msdb.dbo.sp_send_dbmail
       		@profile_name = 'Automat', --@MailProfileName
-      		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+      		@recipients = 'max.weczerek@upc.cz',
       		@subject = @sub,
       		@body = @msg,
       		@body_format = 'HTML'

@@ -332,7 +332,7 @@ Aktualizuje karty
 										AND bb.KitQualityID  = TmpSN.KitQualityID
 							  WHERE ISNULL(SumKitQuantity, 0) - ISNULL(SUMA, 0) <> 0            -- 2015-08-17 pridano ISNULL
 								
-                SET @myAdresaLogistika = @myAdresaLogistika + ';jaroslav.tajbl@upc.cz;michal.rezler@upc.cz'
+                SET @myAdresaLogistika = @myAdresaLogistika + ';max.weczerek@upc.cz'
                 SET @sub = 'FENIX - K1 INFO' + ' Databáze: ' + ISNULL(@myDatabaseName,'')
                 SET @msg = 'Program [dbo].[prCMRCKins](Kitting Confirmation)<br /> Nesouhlasí počty SN s reálným množstvím <br />' +@SeznamItems   
                 EXEC @result = msdb.dbo.sp_send_dbmail
@@ -535,7 +535,7 @@ Aktualizuje karty
                 SET @msg = 'Program prCMRCKins; Záznam MessageId=' + ISNULL(CAST(@MessageId AS VARCHAR(50)),'') + ', MessageTypeId = '+ ISNULL(CAST(@MessageTypeId AS VARCHAR(50)),'') + ' byl již jednou naveden !'
                 EXEC @result = msdb.dbo.sp_send_dbmail
                		@profile_name = 'Automat', --@MailProfileName
-               		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+               		@recipients = 'max.weczerek@upc.cz',
                		@subject = @sub,
                		@body = @msg,
                		@body_format = 'HTML'
@@ -555,7 +555,7 @@ BEGIN CATCH
       SET @msg = 'Program prCMRCKins; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') 
       EXEC @result = msdb.dbo.sp_send_dbmail
      		@profile_name = 'Automat', --@MailProfileName
-     		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+     		@recipients = 'max.weczerek@upc.cz',
      		@subject = @sub,
      		@body = @msg,
      		@body_format = 'HTML'

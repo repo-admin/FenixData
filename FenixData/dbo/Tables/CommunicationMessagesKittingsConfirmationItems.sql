@@ -15,6 +15,8 @@
 );
 
 
+
+
 GO
 
 
@@ -86,4 +88,28 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'musí být 
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Serial Number1 - seriálové číslo zařízení', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'CommunicationMessagesKittingsConfirmationItems', @level2type = N'COLUMN', @level2name = N'KitSNs';
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[CommunicationMessagesKittingsConfirmationItems] TO [FenixR]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[CommunicationMessagesKittingsConfirmationItems] TO [FenixR]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[CommunicationMessagesKittingsConfirmationItems] TO [FenixR]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[CommunicationMessagesKittingsConfirmationItems] TO [FenixR]
+    AS [dbo];
 

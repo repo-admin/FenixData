@@ -583,7 +583,7 @@ BEGIN  -- =====================ZP==========================
             SET @msg = 'Program prReleaseNoteToShipmentIns <br/>' + 'Zkontrolujte tabulku [dbo].[VydejkySprWrhMaterials]'
             EXEC @result = msdb.dbo.sp_send_dbmail
            	     @profile_name = 'Automat', --@MailProfileName
-           	     @recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+           	     @recipients = 'max.weczerek@upc.cz; jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
            	     @subject = @sub,
            	     @body = @msg,
            	     @body_format = 'HTML'
@@ -599,7 +599,7 @@ END    -- =====================ZP==========================
             SET @msg = 'Program prReleaseNoteToShipmentIns <br/>' + 'Zkontrolujte tabulku [dbo].[VydejkySprWrhMaterials] '+ @myErrorDescription
             EXEC @result = msdb.dbo.sp_send_dbmail
            	     @profile_name = 'Automat', --@MailProfileName
-           	     @recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',    -- ;jaroslav.tajbl@upc.cz
+           	     @recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',    -- ;jaroslav.tajbl@upc.cz
            	     @subject = @sub,
            	     @body = @msg,
            	     @body_format = 'HTML'
@@ -616,7 +616,7 @@ BEGIN CATCH
       SET @msg = 'Program prReleaseNoteToShipmentIns' + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'')
       EXEC @result = msdb.dbo.sp_send_dbmail
      		@profile_name = 'Automat', --@MailProfileName
-     		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+     		@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
      		@subject = @sub,
      		@body = @msg,
      		@body_format = 'HTML'

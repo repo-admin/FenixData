@@ -13,6 +13,8 @@
 );
 
 
+
+
 GO
 
 
@@ -72,4 +74,28 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'zde je ID z
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'0...Neodsouhlaseno, 1... Odsouhlaseno, 2... Zamítnuto', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'CommunicationMessagesKittingsConfirmation', @level2type = N'COLUMN', @level2name = N'Reconciliation';
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[CommunicationMessagesKittingsConfirmation] TO [FenixR]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[CommunicationMessagesKittingsConfirmation] TO [FenixR]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[CommunicationMessagesKittingsConfirmation] TO [FenixR]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[CommunicationMessagesKittingsConfirmation] TO [FenixR]
+    AS [dbo];
 

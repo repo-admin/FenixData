@@ -7,3 +7,35 @@
     FOREIGN KEY ([KitId]) REFERENCES [dbo].[cdlKits] ([ID])
 );
 
+
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[B2cKittingKits] TO [FenixW]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[B2cKittingKits] TO [FenixW]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[B2cKittingKits] TO [CrmImport]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[B2cKittingKits] TO [FenixW]
+    AS [dbo];
+
+
+GO
+GRANT DELETE
+    ON OBJECT::[dbo].[B2cKittingKits] TO [FenixW]
+    AS [dbo];
+

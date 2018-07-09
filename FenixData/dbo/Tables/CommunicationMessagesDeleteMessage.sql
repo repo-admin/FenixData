@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[CommunicationMessagesDeleteMessage] (
-    [ID]                           INT            IDENTITY (100, 1) NOT NULL,
+    [ID]                           INT            IDENTITY (1, 1) NOT NULL,
     [MessageId]                    INT            NOT NULL,
     [MessageTypeId]                INT            NOT NULL,
     [MessageTypeDescription]       NVARCHAR (200) NOT NULL,
@@ -16,6 +16,8 @@
     [ModifyUserId]                 INT            CONSTRAINT [DF_CommunicationMessagesDeleteMessage_ModifyUserId] DEFAULT ((0)) NOT NULL,
     CONSTRAINT [PK_CommunicationMessagesDeleteMessage] PRIMARY KEY CLUSTERED ([ID] ASC) WITH (FILLFACTOR = 85)
 );
+
+
 
 
 GO

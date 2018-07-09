@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[prCMRCconsent]
+﻿CREATE PROCEDURE [dbo].[prCMRCconsent]
 			@Decision  AS Int, -- 3... zamítám, 1... schvaluji  2015-11-03 hodnota 2 se už nepoužívá
 			@Id        AS Int, -- ID záznamu z tabulky [dbo].[CommunicationMessagesReceptionConfirmation]
 
@@ -130,7 +129,7 @@ BEGIN CATCH
       SET @msg = 'Program prCMRCins; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') 
       EXEC @result = msdb.dbo.sp_send_dbmail
      		@profile_name = 'Automat', --@MailProfileName
-     		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+     		@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
      		@subject = @sub,
      		@body = @msg,
      		@body_format = 'HTML'

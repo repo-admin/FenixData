@@ -21,6 +21,8 @@
 );
 
 
+
+
 GO
 
 CREATE  TRIGGER trCommunicationMessagesReceptionSentItemsUpd
@@ -125,4 +127,10 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'měrná jed
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Dá se předpokládat, že při automatické kontrole a vytvoření záznamu bude uživatel nějaký, třeba 0', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'CommunicationMessagesReceptionSentItems', @level2type = N'COLUMN', @level2name = N'ModifyUserId';
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[CommunicationMessagesReceptionSentItems] TO [FenixR]
+    AS [dbo];
 

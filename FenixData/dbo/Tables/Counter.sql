@@ -6,3 +6,23 @@
     CONSTRAINT [PK__APP_Counter] PRIMARY KEY CLUSTERED ([ID] ASC) WITH (FILLFACTOR = 85)
 );
 
+
+
+
+GO
+GRANT UPDATE
+    ON OBJECT::[dbo].[Counter] TO [FenixR]
+    AS [dbo];
+
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[Counter] TO [FenixR]
+    AS [dbo];
+
+
+GO
+GRANT INSERT
+    ON OBJECT::[dbo].[Counter] TO [FenixR]
+    AS [dbo];
+

@@ -148,7 +148,7 @@ WHERE CISELNIKY.[dbo].[tFenixHeliosObjPol].ID NOT IN (SELECT ID FROM [dbo].[Feni
                             @err
      					 EXEC @result = msdb.dbo.sp_send_dbmail
      							@profile_name = 'Automat', --@MailProfileName
-     							@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+     							@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
      							@subject = @sub,
      							@body = @msg,
      							@body_format = 'HTML'
@@ -161,7 +161,7 @@ WHERE CISELNIKY.[dbo].[tFenixHeliosObjPol].ID NOT IN (SELECT ID FROM [dbo].[Feni
                   SET @msg =  @err
      			    	EXEC @result = msdb.dbo.sp_send_dbmail
      			    			@profile_name = 'Automat', --@MailProfileName
-     			    			@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+     			    			@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
      			    			@subject = @sub,
      			    			@body = @msg,
      			    				@body_format = 'HTML'
@@ -174,7 +174,7 @@ WHERE CISELNIKY.[dbo].[tFenixHeliosObjPol].ID NOT IN (SELECT ID FROM [dbo].[Feni
                 SET @msg = 'CHYBA !!!' + '<br />'+ ERROR_MESSAGE()
      					 EXEC @result = msdb.dbo.sp_send_dbmail
      							@profile_name = 'Automat', --@MailProfileName
-     							@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+     							@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
      							@subject = @sub,
      							@body = @msg,
      							@body_format = 'HTML'

@@ -50,3 +50,9 @@ GRANT EXECUTE
     ON OBJECT::[dbo].[prAppLogWriteNew] TO [FenixW]
     AS [dbo];
 
+
+GO
+GRANT EXECUTE
+    ON OBJECT::[dbo].[prAppLogWriteNew] TO [FenixR]
+    AS [dbo];
+

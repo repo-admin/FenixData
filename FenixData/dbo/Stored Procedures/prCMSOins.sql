@@ -312,7 +312,7 @@ BEGIN TRY
                                        SET @msg = 'Zkontrolujte @hID=' + CAST(@hID AS VARCHAR(50)) +' '+ ISNULL(ERROR_MESSAGE(),'')
     			                    		  EXEC @result = msdb.dbo.sp_send_dbmail
     			                    		       @profile_name = 'Automat', --@MailProfileName
-    			                    		       @recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+    			                    		       @recipients = 'max.weczerek@upc.cz',
     			                    		       @subject = @sub,
     			                    		       @body = @msg,
     			                    		       @body_format = 'HTML'
@@ -329,7 +329,7 @@ BEGIN TRY
                                  SET @msg = 'Zkontrolujte @hID=' + CAST(@hID AS VARCHAR(50)) +' '+ ISNULL(ERROR_MESSAGE(),'')
     			              		  EXEC @result = msdb.dbo.sp_send_dbmail
     			              		       @profile_name = 'Automat', --@MailProfileName
-    			              		       @recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+    			              		       @recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
     			              		       @subject = @sub,
     			              		       @body = @msg,
     			              		       @body_format = 'HTML'
@@ -349,7 +349,7 @@ BEGIN TRY
                          SET @msg = 'Zkontrolujte @hID=' + CAST(@hID AS VARCHAR(50)) +' '+ ISNULL(ERROR_MESSAGE(),'')
     			          	EXEC @result = msdb.dbo.sp_send_dbmail
     			          	     @profile_name = 'Automat', --@MailProfileName
-    			          	     @recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+    			          	     @recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
     			          	     @subject = @sub,
     			          	     @body = @msg,
     			                 @body_format = 'HTML'
@@ -378,7 +378,7 @@ BEGIN TRY
                     SET @msg = 'Zkontrolujte ' +' OBJ Hlavička ID='+ ISNULL(CAST(@hID AS VARCHAR(50)),'???')+ ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'')
     					 EXEC @result = msdb.dbo.sp_send_dbmail
     							@profile_name = 'Automat', --@MailProfileName
-    							@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+    							@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
     							@subject = @sub,
     							@body = @msg,
     							@body_format = 'HTML'
@@ -425,7 +425,7 @@ BEGIN CATCH
       SET @msg = 'Program prCMSOins'  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'')
       EXEC @result = msdb.dbo.sp_send_dbmail
      		@profile_name = 'Automat', --@MailProfileName
-     		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+     		@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
      		@subject = @sub,
      		@body = @msg,
      		@body_format = 'HTML'

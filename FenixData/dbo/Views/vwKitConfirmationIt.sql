@@ -39,3 +39,9 @@ ON Q.ID = CMRCI.[KitQualityId]
 
 
 
+
+GO
+GRANT SELECT
+    ON OBJECT::[dbo].[vwKitConfirmationIt] TO [FenixR]
+    AS [dbo];
+

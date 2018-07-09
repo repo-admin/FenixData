@@ -18,6 +18,10 @@
     [ModifyDate]               DATETIME        NOT NULL,
     [ModifyUserId]             INT             NOT NULL,
     [A_ModifyDate]             DATETIME        CONSTRAINT [DF_A_CommunicationMessagesRefurbishedOrderConfirmationItems_A_ModifyDate] DEFAULT (getdate()) NOT NULL,
+    [SN1]                      NVARCHAR (50)   NULL,
+    [SN2]                      NVARCHAR (50)   NULL,
     CONSTRAINT [PK_A_CommunicationMessagesRefurbishedOrderConfirmationItems] PRIMARY KEY CLUSTERED ([A_ID] ASC) WITH (FILLFACTOR = 85)
 );
+
+
 

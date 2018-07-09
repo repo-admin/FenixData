@@ -448,12 +448,10 @@ BEGIN CATCH
       IF @@TRANCOUNT > 0 ROLLBACK TRAN
       SELECT @ReturnValue=1, @ReturnMessage='Chyba'
       SET @sub = 'FENIX - S0  Shipment order' + ' Databáze: '+ISNULL(@myDatabaseName,'')
-      SET @msg = 'Program prKiSHins; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') + 
-                 ' --  @myCustomerID ='+ISNULL(CAST(@myCustomerID AS VARCHAR(50)),'')+' ,@myKeyDestinationPlacesContactsId='+ISNULL(CAST(@myKeyDestinationPlacesContactsId AS VARCHAR(150)),'')
-                 +', @VydejkyId ='+ISNULL(CAST(@VydejkyId AS VARCHAR(50)),'')
+      SET @msg = 'Program prKiSHins; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') 
       EXEC @result = msdb.dbo.sp_send_dbmail
      		@profile_name = 'Automat', --@MailProfileName
-     		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+     		@recipients = 'max.weczerek@upc.cz',
      		@subject = @sub,
      		@body = @msg,
      		@body_format = 'HTML'

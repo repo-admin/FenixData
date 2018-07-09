@@ -8,17 +8,16 @@
 
 
 
-
 CREATE VIEW [dbo].[vwShipmentConfirmationIt]
 AS
---  /*
---  -- ===============================================================================================
----- Created by   : Weczerek Max
----- Created date : 2014-08-31
----- Updated date : 2014-09-09, 2014-09-24, 2014-10-03, 2014-11-10, 2015-04-28 (DISTINCT)
----- Description  : zobrazuje Shipment Confirmation Items 
----- ===============================================================================================
---  */
+  /*
+  -- ===============================================================================================
+-- Created by   : Weczerek Max
+-- Created date : 2014-08-31
+-- Updated date : 2014-09-09, 2014-09-24, 2014-10-03, 2014-11-10, 2015-04-28 (DISTINCT)
+-- Description  : zobrazuje Shipment Confirmation Items 
+-- ===============================================================================================
+  */
 
 SELECT DISTINCT CMRCI.[ID] ,CMRCI.[CMSOId] ,
         CASE CMRCI.[SingleOrMaster] WHEN 0 THEN 'Single' WHEN 1 THEN 'Master' ELSE '' END SingleOrMaster 
@@ -45,10 +44,7 @@ FROM [dbo].[CommunicationMessagesShipmentOrdersConfirmationItems]         CMRCI
 INNER JOIN [dbo].[CommunicationMessagesShipmentOrdersConfirmation]        CMSOC
      ON CMRCI.CMSOId = CMSOC.Id
 INNER JOIN [dbo].[CommunicationMessagesShipmentOrdersSentItems]           CMSOSI
-     ON CMSOC.[ShipmentOrderID] = CMSOSI.[CMSOId] 
-     AND CMRCI.[ItemOrKitID] = CMSOSI.[ItemOrKitID] 
-     AND CMRCI.[ItemVerKit] = CMSOSI.[ItemVerKit] 
-     AND CMRCI.[RealItemOrKitQualityID] = CMSOSI.[ItemOrKitQualityId]
+     ON CMSOC.[ShipmentOrderID] = CMSOSI.[CMSOId] and CMRCI.[ItemOrKitID] = CMSOSI.[ItemOrKitID] AND CMRCI.[ItemVerKit] = CMSOSI.[ItemVerKit] AND CMRCI.[RealItemOrKitQualityID] = CMSOSI.[ItemOrKitQualityId]
      AND CMSOSI.[SingleOrMaster] = CMRCI.[SingleOrMaster] 
 
 LEFT OUTER JOIN [dbo].[cdlQualities]  Q

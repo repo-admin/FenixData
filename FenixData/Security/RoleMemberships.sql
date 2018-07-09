@@ -32,3 +32,11 @@ ALTER ROLE [db_datareader] ADD MEMBER [FenixW];
 GO
 ALTER ROLE [db_datawriter] ADD MEMBER [FenixW];
 
+
+GO
+ALTER ROLE [db_owner] ADD MEMBER [UPC\hanys];
+
+
+GO
+ALTER ROLE [db_owner] ADD MEMBER [CrmImport];
+

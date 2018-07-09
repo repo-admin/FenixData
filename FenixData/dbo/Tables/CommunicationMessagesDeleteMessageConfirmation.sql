@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[CommunicationMessagesDeleteMessageConfirmation] (
-    [ID]                           INT            IDENTITY (100, 1) NOT NULL,
+    [ID]                           INT            IDENTITY (1, 1) NOT NULL,
     [StockId]                      INT            NOT NULL,
     [MessageId]                    INT            NOT NULL,
     [MessageTypeId]                INT            NOT NULL,
@@ -16,6 +16,8 @@
     [ModifyUserId]                 INT            CONSTRAINT [DF_CommunicationMessagesDeleteMessageConfirmation_ModifyUserId] DEFAULT ((0)) NOT NULL,
     CONSTRAINT [PK_CommunicationMessagesDeleteMessageConfirmation] PRIMARY KEY CLUSTERED ([ID] ASC) WITH (FILLFACTOR = 85)
 );
+
+
 
 
 GO

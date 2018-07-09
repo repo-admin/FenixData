@@ -1,48 +1,52 @@
 ﻿-- =============================================
--- Author:		David Johanovsky
+-- Author:		David Johanovsky, Petr Celner
 -- Create date: 07.07.2016
+-- Edit:		07.06.2018
 -- Description:	Insertion, validation and logic behind creation of a new order and related entities from CRM
 -- =============================================
 CREATE PROCEDURE [dbo].[prInsertCrmOrder]
 
 	-- CrmContract required
-	@zl_cislo_smlouvy INT,
-	@zl_jmeno_a_prijmeni NVARCHAR(100),
+	@wo_cid INT,									-- zl_cislo_smlouvy
+	@wo_first_last_name NVARCHAR(100),				-- zl_jmeno_a_prijmeni
 
 	-- CrmContractHistory required
-	@zl_ulice NVARCHAR(100),
-	@zl_cislo_pop_or NVARCHAR(20),
-	@zl_patro_prip_bod NVARCHAR(50),
-	@f_typ_klienta NVARCHAR(30),
-	@zl_obec NVARCHAR(100),
+	@wo_street_name NVARCHAR(100),					-- zl_ulice
+	@wo_house_number NVARCHAR(20),					-- zl_cislo_pop_or
+	@wo_floor_flat NVARCHAR(50),					-- zl_patro_prip_bod
+	@f_customer_type NVARCHAR(30),					-- f_typ_klienta
+	@wo_city NVARCHAR(100),							-- zl_obec
+	@wo_zip	NVARCHAR(20),							-- zl_psc
 
 	-- CrmContractHistory not-required
-	@zl_telefon_domu_zamest NVARCHAR(50) = NULL,
-	@zl_mobil NVARCHAR(20) = NULL,
-	@zl_email_info1 NVARCHAR(80) = NULL,
-	@zl_email_info2 NVARCHAR(50) = NULL,
-	@zl_email NVARCHAR(100) = NULL,
-	@zl_heslo NVARCHAR(20) = NULL,
-	@zl_line1 NVARCHAR(15) = NULL,
-	@zl_line2 NVARCHAR(15) = NULL,
+--	@zl_telefon_domu_zamest NVARCHAR(50) = NULL,	-- nepouzito
+	@wo_phone NVARCHAR(20) = NULL,					-- zl_mobil
+	@wo_email_info1 NVARCHAR(80) = NULL,			-- zl_email_info1
+--	@zl_email_info2 NVARCHAR(50) = NULL,			-- nepouzito
+	@wo_email NVARCHAR(100) = NULL,					-- zl_email
+	@wo_password NVARCHAR(20) = NULL,				-- zl_heslo
+	@wo_upc_tel1 NVARCHAR(15) = NULL,				-- zl_line1
+	@wo_upc_tel2 NVARCHAR(15) = NULL,				-- zl_line2
 
 	-- CrmContractOrder required
-	@zl_cislo_objednavky NVARCHAR(20),
-	@zl_zadano DATE,
-	@zl_cas_prislibu_od DATE,
-	@zl_cas_prislibu_do DATE,
-	@zl_typ_objednavky NVARCHAR(40),
-	@f_typ_pr TINYINT, -- 1 = INET / 2 = DTV / 3 = TEL
+	@wo_pr_number NVARCHAR(20),						-- zl_cislo_objednavky
+	@wo_pr_create_date NVARCHAR(30),						-- zl_zadano
+	@wo_delivery_date_from NVARCHAR(30),					-- zl_cas_prislibu_od
+	@wo_delivery_date_to NVARCHAR(30),						-- zl_cas_prislibu_do
+	@wo_pr_type NVARCHAR(40),						-- zl_typ_objednavky
+	@f_pr_type INT,		-- 1 = INET / 2 = DTV / 3 = TEL / 4 = INET+TEL / 5 = ACCESSORY
+
 
 	-- CrmContractOrder not-required
-	@zl_cpe_back NVARCHAR(255) = NULL,
-	@zl_instrukce NVARCHAR(150) = NULL,
-	@f_pronajem NVARCHAR(255) = NULL,
-	@f_prodej NVARCHAR(255) = NULL,
-	@f_inet_core_number INT = NULL, -- product number, not name !!!
+	@wo_cpe_back NVARCHAR(30) = NULL,				-- zl_cpe_back
+	@wo_note NVARCHAR(100) = NULL,					-- zl_instrukce
+	@f_rental NVARCHAR(30) = NULL,					-- f_pronajem
+	@f_sale NVARCHAR(30) = NULL,					-- f_prodej
+	@f_inet_core_product INT = NULL -- product number, not name !!!
+
 
 	-- user in ZiCys who started the procedure
-	@ZiCysId INT
+--	@f_zicyz_id INT									-- ZiCysId
 
 AS
 BEGIN
@@ -50,19 +54,34 @@ BEGIN
 	SET NOCOUNT ON;
 
 	-- 00.SECTION : basic validations
-	IF (@f_typ_pr = 1 AND @f_inet_core_number IS NULL) RETURN -1; -- if INET type, inet_core_number is required
-	IF (@f_prodej IS NULL AND @f_pronajem IS NULL) RETURN -2; -- at least one of the following is required
-	IF (@f_typ_pr < 1 OR @f_typ_pr > 3) RETURN -3; -- if order type is outside specified range
+--	IF (@f_pr_type = 1 AND @f_inet_core_product IS NULL) RETURN -1;  nebo typ 4  -- if INET type, inet_core_number is required
+--  IF (@f_sale IS NULL AND @f_rental IS NULL) RETURN -2; -- at least one of the following is required platí pokud se nejedná o příslušenství
+
+	-- Zjisteni posledniho cisla zpravy
+	DECLARE @myMessageId int
+    SELECT @myMessageId = [LastFreeNumber]  FROM [dbo].[cdlMessageNumber] WHERE CODE = 1
+    UPDATE [dbo].[cdlMessageNumber] SET [LastFreeNumber] = [LastFreeNumber] + 1  WHERE CODE = 1
+
+	-- Zjisteni aktualniho data
+	DECLARE @modifyDate datetime
+
+	-- Konverze datumu z textu do datetime
+	DECLARE @wo_pr_create_datetime datetime
+	DECLARE @wo_delivery_datetime_from datetime
+	DECLARE @wo_delivery_datetime_to datetime	
+	SELECT @wo_pr_create_datetime = CONVERT(datetime, @wo_pr_create_date, 104)
+	SELECT @wo_delivery_datetime_from = CONVERT(datetime, @wo_delivery_date_from, 104)
+	SELECT @wo_delivery_datetime_to = CONVERT(datetime, @wo_delivery_date_to, 104)
 
 	-- 01.SECTION : declaring used variables and getting Ids from reusable tables
-	DECLARE @contractId INT = (SELECT Id FROM dbo.CrmContracts WHERE zl_cislo_smlouvy = @zl_cislo_smlouvy),
+/**	DECLARE @contractId INT = (SELECT Id FROM dbo.CrmContracts WHERE zl_cislo_smlouvy = @zl_cislo_smlouvy),
 			@clientTypeId INT = (SELECT Id FROM dbo.CrmContractClientTypes WHERE f_typ_klienta = @f_typ_klienta),
 			@inetTypeId INT = (SELECT Id FROM dbo.CrmContractInetTypes WHERE f_inet_core_number = @f_inet_core_number),
 			@orderTypeId INT = (SELECT Id FROM dbo.CrmContractOrderTypes WHERE zl_typ_objednavky = @zl_typ_objednavky),
 			@contractHistoryMappingId INT = 0,
 			@contractHistoryId INT = 0;
 
-	-- if contract does not exist
+	 if contract does not exist
 	IF (@contractId IS NULL) 
 		BEGIN
 
@@ -126,11 +145,16 @@ BEGIN
 					
 				END
 		END
+**/
 
 	-- 03.SECTION : dbo.CrmContractOrders operations
-	INSERT INTO dbo.CrmContractOrders(HistoryMappingId, zl_cislo_objednavky, zl_zadano, zl_cas_prislibu_od, zl_cas_prislibu_do, OrderTypeId, zl_cpe_back, zl_instrukce, ProductTypeId, f_pronajem, f_prodej, InetTypeId, CreatedBy)
-	VALUES (@contractHistoryMappingId, @zl_cislo_objednavky, @zl_zadano, @zl_cas_prislibu_od, @zl_cas_prislibu_do, @orderTypeId, @zl_cpe_back, @zl_instrukce, @f_typ_pr, @f_pronajem, @f_prodej, @inetTypeId, @ZiCysId);
+	--INSERT INTO dbo.CrmContractOrders(HistoryMappingId, zl_cislo_objednavky, zl_zadano, zl_cas_prislibu_od, zl_cas_prislibu_do, OrderTypeId, zl_cpe_back, zl_instrukce, ProductTypeId, f_pronajem, f_prodej, InetTypeId, CreatedBy)
+	--VALUES (@contractHistoryMappingId, @zl_cislo_objednavky, @zl_zadano, @zl_cas_prislibu_od, @zl_cas_prislibu_do, @orderTypeId, @zl_cpe_back, @zl_instrukce, @f_typ_pr, @f_pronajem, @f_prodej, @inetTypeId, @ZiCysId);
 
-	RETURN 1;
+	-- Plneni tabulky pro C0
+	INSERT INTO dbo.CommunicationMessagesCrmOrder(MessageID, WO_PR_NUMBER, WO_PR_CREATE_DATE, WO_DELIVERY_DATE_FROM, WO_DELIVERY_DATE_TO, WO_CID, WO_FIRST_LAST_NAME, WO_STREET_NAME, WO_HOUSE_NUMBER, WO_CITY, WO_ZIP, WO_PHONE, WO_EMAIL_INFO1, WO_PR_TYPE, WO_FLOOR_FLAT, WO_UPC_TEL1, WO_UPC_TEL2, WO_EMAIL, WO_PASSWORD, WO_CPE_BACK, WO_NOTE, F_CUSTOMER_TYPE, F_PR_TYPE, F_RENTAL, F_SALE, F_INET_CORE_PRODUCT )
+	VALUES (@myMessageId, @wo_pr_number, @wo_pr_create_datetime, @wo_delivery_datetime_from, @wo_delivery_datetime_to, @wo_cid, @wo_first_last_name, @wo_street_name, @wo_house_number, @wo_city, @wo_zip, @wo_phone, @wo_email_info1, @wo_pr_type, @wo_floor_flat, @wo_upc_tel1, @wo_upc_tel2, @wo_email, @wo_password, @wo_cpe_back, @wo_note, @f_customer_type, @f_pr_type, @f_rental, @f_sale, @f_inet_core_product)
+
+	--RETURN 1;
 		
 END

@@ -223,7 +223,7 @@ END
                                    ', SingleOrMaster='+CAST(@mySingleOrMaster AS varchar(50))+', ShipmentOrderID='+CAST(@myShipmentOrderID AS varchar(50))
                         EXEC @result = msdb.dbo.sp_send_dbmail
                        		@profile_name = 'Automat', --@MailProfileName
-                       		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+                       		@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
                        		@subject = @sub,
                        		@body = @msg,
                        		@body_format = 'HTML'
@@ -371,7 +371,7 @@ END
 
                                EXEC @result = msdb.dbo.sp_send_dbmail
                                	@profile_name = 'Automat', --@MailProfileName
-                               	@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+                               	@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
                                	@subject = @sub,
                                	@body = @msg,
                                	@body_format = 'HTML'
@@ -431,7 +431,7 @@ END
                            SET @msg = 'Program prCMRCconsentS; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') +' Problém s aktualizací tabulky VydejkySprWrhMaterials, S1ID = ' + ISNULL(CAST(@Id  AS VARCHAR(50)),'')
                            EXEC @result = msdb.dbo.sp_send_dbmail
                           		@profile_name = 'Automat', --@MailProfileName
-                          		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+                          		@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
                           		@subject = @sub,
                           		@body = @msg,
                           		@body_format = 'HTML'
@@ -488,7 +488,7 @@ BEGIN CATCH
       SET @msg = 'Program prCMRCconsentS; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') 
       EXEC @result = msdb.dbo.sp_send_dbmail
      		@profile_name = 'Automat', --@MailProfileName
-     		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+     		@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
      		@subject = @sub,
      		@body = @msg,
      		@body_format = 'HTML'

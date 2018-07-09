@@ -454,7 +454,7 @@ nic nedělá, jen uloží data
                    SET @msg = 'Program [dbo].[prCMReturnedItem]; Záznam MessageId=' + ISNULL(CAST(@myMessageId AS VARCHAR(50)),'') + ', MessageTypeId = '+ ISNULL(CAST(@myMessageTypeId AS VARCHAR(50)),'') + ' byl již jednou naveden !'
                    EXEC @result = msdb.dbo.sp_send_dbmail
                		@profile_name = 'Automat', --@MailProfileName
-               		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+               		@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
                		@subject = @sub, 
                		@body = @msg,
                		@body_format = 'HTML'
@@ -472,7 +472,7 @@ BEGIN CATCH
        SET @msg = 'Program [dbo].[prCMReturnedItem]; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') 
        EXEC @result = msdb.dbo.sp_send_dbmail
       		@profile_name = 'Automat', --@MailProfileName
-      		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+      		@recipients = 'max.weczerek@upc.cz;michal.rezler@upc.cz',
       		@subject = @sub,
       		@body = @msg,
       		@body_format = 'HTML'

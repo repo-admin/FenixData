@@ -16,8 +16,12 @@
     [IsActive]                 BIT             CONSTRAINT [DF_CommunicationMessagesRefurbishedOrderConfirmationItems_IsActive] DEFAULT ((1)) NOT NULL,
     [ModifyDate]               DATETIME        CONSTRAINT [DF_CommunicationMessagesRefurbishedOrderConfirmationItems_ModifyDate] DEFAULT (getdate()) NOT NULL,
     [ModifyUserId]             INT             CONSTRAINT [DF_CommunicationMessagesRefurbishedOrderConfirmationItems_ModifyUserId] DEFAULT ((0)) NOT NULL,
+    [SN1]                      NVARCHAR (50)   NULL,
+    [SN2]                      NVARCHAR (50)   NULL,
     CONSTRAINT [PK_CommunicationMessagesRefurbishedOrderConfirmationItems] PRIMARY KEY CLUSTERED ([ID] ASC) WITH (FILLFACTOR = 85)
 );
+
+
 
 
 GO

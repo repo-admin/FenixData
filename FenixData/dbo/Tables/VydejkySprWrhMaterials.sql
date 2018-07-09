@@ -19,6 +19,8 @@
 );
 
 
+
+
 GO
 
 
@@ -147,4 +149,12 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'messageId N
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'požadované datum dodání', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'VydejkySprWrhMaterials', @level2type = N'COLUMN', @level2name = N'DeliveryDate';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'S1 hlavicky', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'VydejkySprWrhMaterials', @level2type = N'COLUMN', @level2name = N'S1Id';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'ID S0hlavicky', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'VydejkySprWrhMaterials', @level2type = N'COLUMN', @level2name = N'S0Id';
 

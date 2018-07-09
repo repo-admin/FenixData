@@ -290,7 +290,7 @@ SELECT @myError
              SET @msg = 'Program prRefurbishedConfirmationManuallyIns; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') 
              EXEC @result = msdb.dbo.sp_send_dbmail
             		@profile_name = 'Automat', --@MailProfileName
-            		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+            		@recipients = 'max.weczerek@upc.cz',
             		@subject = @sub,
             		@body = @msg,
             		@body_format = 'HTML'
@@ -305,7 +305,7 @@ SELECT @myError
       SET @msg = 'Program prRefurbishedConfirmationManuallyIns; '  + ISNULL(ERROR_MESSAGE(),'') + ISNULL(CAST(ERROR_NUMBER() AS VARCHAR(50)),'') 
       EXEC @result = msdb.dbo.sp_send_dbmail
      		@profile_name = 'Automat', --@MailProfileName
-     		@recipients = 'jaroslav.tajbl@upc.cz;michal.rezler@upc.cz',
+     		@recipients = 'max.weczerek@upc.cz',
      		@subject = @sub,
      		@body = @msg,
      		@body_format = 'HTML'

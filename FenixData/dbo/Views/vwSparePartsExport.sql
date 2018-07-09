@@ -1,5 +1,4 @@
-﻿
-CREATE VIEW [dbo].[vwSparePartsExport]
+﻿CREATE VIEW [dbo].[vwSparePartsExport]
 AS
 /*
 -- ==========================================================================================================
@@ -10,19 +9,14 @@ AS
 -- Parameters   : 
 -- History      :
 -- ==========================================================================================================
-
-
-Bylo změněno dne 2016-05-17 na žádost paní Terezy Gubrické;
-původní view :[dbo].[vwSparePartsExport_PUVODNI_20160517]
-Změnu provedl: Max Weczerek
 */
 
 SELECT csi.[ItemOrKitID] AS 'item_code'
 			,'CZ' AS 'location'
-			,csi.[ItemOrKitFree] as 'depl'
+			,0 as 'depl'
 			,0 as 'undepl'
 			,0 as 'blocked'
-			,0 as 'new'
+			,csi.[ItemOrKitFree] as 'new'
 			,0 as 'used'
 			,0 as 'channel_new'
 			,0 as 'channel_used'
